@@ -3,7 +3,7 @@
 <details>
   <summary>Описание выполненного здесь задания.</summary> 
 
-# ДЗ(Практика) «Select-запросы, выборки из одной таблицы»
+## ДЗ(Практика) «Select-запросы, выборки из одной таблицы»
 
 **КОД создания БД в модуле "requests_CREATE.py"**
 
@@ -50,4 +50,10 @@
 
 </details>
 
+<details>
+  <summary>Your header here! (Click to expand)</summary>
+  Your content here...
+  > markup like blockquote's should even work on github!
+  more content here...
+</details>
 ---
