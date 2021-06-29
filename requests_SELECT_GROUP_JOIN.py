@@ -1,6 +1,7 @@
 import sqlalchemy
 from pprint import pprint
 
+
 def select_requests():
     # 1.Количество исполнителей в каждом жанре;
     performers = connection.execute("""SELECT l.genre_name, COUNT(id_performer) from genre_performer g
@@ -36,11 +37,10 @@ GROUP BY a.name_album;""").fetchall()
     # 4.Все исполнители, которые не выпустили альбомы в 2020 году;
     # Добавил в конце GROUP BY id_performer так как у "Руки Вверх" два альбома
     # и он задваивает группу при выводе списка исполнителей
-    all_performers_2020 = connection.execute("""SELECT l.id_performer, l.name_nickname FROM list_performers l
+    all_performers_2020 = connection.execute("""SELECT DISTINCT l.id_performer, l.name_nickname FROM list_performers l
 JOIN performers_in_album p ON p.id_performer = l.id_performer
 JOIN albums a ON a.id_album = p.id_album
 WHERE a.release_date != 2020
-GROUP BY l.id_performer, l.name_nickname
 ORDER BY l.id_performer;""").fetchall()
     pprint(all_performers_2020)
     print()
@@ -75,32 +75,24 @@ WHERE tc.id_collection IS NULL;""").fetchall()
 
     # 8.Вывести исполнителя(-ей), написавшего самый короткий по продолжительности трек
     # (теоретически таких треков может быть несколько);
-    # !!! Выведет все треки по наростаюшей, каждого исполнителья несколько раз если у него самые коротки треки
     performer_mini_track = connection.execute("""SELECT lp.name_nickname, t.duration FROM list_performers lp
 JOIN performers_in_album pa ON lp.id_performer = pa.id_performer
 JOIN albums a ON pa.id_album = a.id_album
 JOIN tracks t ON a.id_album = t.id_album
-ORDER BY t.duration
-LIMIT 10;""").fetchall()
+WHERE t.duration = (SELECT MIN(t.duration) FROM tracks t);""").fetchall()
     pprint(performer_mini_track)
-    print()
-
-    # Выведет ОДИН САМЫй КОРОТКИй трек, каждого исполнителья
-    performer_mini_track_v2 = connection.execute("""SELECT lp.name_nickname, MIN(t.duration) FROM list_performers lp
-JOIN performers_in_album pa ON lp.id_performer = pa.id_performer
-JOIN albums a ON pa.id_album = a.id_album
-JOIN tracks t ON a.id_album = t.id_album
-GROUP BY lp.name_nickname
-ORDER BY MIN(t.duration)
-LIMIT 10;""").fetchall()
-    pprint(performer_mini_track_v2)
     print()
 
     # 9.Название альбомов, содержащих наименьшее количество треков.
     mini_album = connection.execute("""SELECT name_album, COUNT(t.id_album) FROM albums a
 JOIN tracks t ON a.id_album = t.id_album
 GROUP BY a.name_album, t.id_album
-ORDER BY COUNT(t.id_album);""").fetchall()
+HAVING COUNT(t.id_album) = (
+SELECT MIN(count)
+FROM (SELECT COUNT(t.id_album) FROM albums a
+JOIN tracks t ON a.id_album = t.id_album
+GROUP BY t.id_album)AS count
+);""").fetchall()
     pprint(mini_album)
     print()
 
