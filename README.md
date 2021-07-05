@@ -5,11 +5,11 @@
   
 ## ДЗ(Практика) «Select-запросы, выборки из одной таблицы»
 
-**КОД создания БД в модуле "requests_CREATE.py"**
+**КОД создания БД в модуле ["requests_CREATE.py"](https://github.com/Yakobro-coder/CREATE_INSET_SELECT_DataBase-Python_sqlalchemy-/blob/master/requests_CREATE.py)**
 ### Задание 1
- **КОД в модуле "requests_INSERT.py"**
+ **КОД в модуле ["requests_INSERT.py"](https://github.com/Yakobro-coder/CREATE_INSET_SELECT_DataBase-Python_sqlalchemy-/blob/master/requests_INSERT.py)**
 
-Заполнить базу(Схема БД файл **"scheme_database.png"**). В ней должно быть:
+Заполнить базу(Схема БД файл **["scheme_database.png"](https://github.com/Yakobro-coder/CREATE_INSET_SELECT_DataBase-Python_sqlalchemy-/blob/master/scheme_database.png)**). В ней должно быть:
 
 * не менее 8 исполнителей;
 * не менее 5 жанров;
@@ -21,7 +21,7 @@
 (исполнителей с жанрами, исполнителей с альбомами, сборников с треками).
 
 ### Задание 2
-**КОД в модуле "requests_SELECT.py"**
+**КОД в модуле ["requests_SELECT.py"](https://github.com/Yakobro-coder/CREATE_INSET_SELECT_DataBase-Python_sqlalchemy-/blob/master/requests_SELECT.py)**
 
 Написать SELECT-запросы, которые выведут информацию согласно инструкциям ниже.  
 Результаты запросов не должны быть пустыми (учесть при заполнении таблиц).
@@ -34,7 +34,7 @@
 6. название треков, которые содержат слово "мой"/"my".
 
 ### Задание 3
-**КОД в модуле "requests_SELECT_GROUP_JOIN.py"**
+**КОД в модуле ["requests_SELECT_GROUP_JOIN.py"](https://github.com/Yakobro-coder/CREATE_INSET_SELECT_DataBase-Python_sqlalchemy-/blob/master/requests_SELECT_GROUP_JOIN.py)**
 
 Написать SELECT-запросы, которые выведут информацию согласно инструкциям ниже.
 Результаты запросов не должны быть пустыми (при необходимости добавьте данные в таблицы).
